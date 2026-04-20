@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -11,8 +12,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var rvDessertCatalog: RecyclerView
     private lateinit var layoutEmptyView: LinearLayout
+    private lateinit var svDessert: SearchView
 
-    // List untuk menampung data
+    // List untuk menampung data asli
     private val list = ArrayList<Dessert>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,17 +23,31 @@ class MainActivity : AppCompatActivity() {
 
         rvDessertCatalog = findViewById(R.id.rvDessertCatalog)
         layoutEmptyView = findViewById(R.id.layoutEmptyView)
+        svDessert = findViewById(R.id.svDessert)
 
-        // 1. Ambil data
+        // 1. Ambil data asli
         list.addAll(getDummyData())
 
-        // 2. Jalankan pengecekan UI
-        checkDataAndUpdateUI()
+        // 2. Setup RecyclerView awal
+        showRecyclerList(list)
+
+        // 3. Jalankan pengecekan UI (Empty View)
+        checkDataAndUpdateUI(list)
+
+        // 4. Logic Pencarian
+        svDessert.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+        })
     }
 
     private fun getDummyData(): ArrayList<Dessert> {
         val dataName = resources.getStringArray(R.array.data_name)
-        // Gunakan gambar default android dulu atau ganti dengan drawable kamu
+        // Pastikan R.drawable.ic_launcher_background ada, atau ganti dengan gambar dessertmu
         val dataPhoto = R.drawable.ic_launcher_background
 
         val listDessert = ArrayList<Dessert>()
@@ -41,22 +57,32 @@ class MainActivity : AppCompatActivity() {
         return listDessert
     }
 
-    private fun checkDataAndUpdateUI() {
-        if (list.isEmpty()) {
+    private fun filterList(query: String?) {
+        val filteredList = ArrayList<Dessert>()
+        for (item in list) {
+            if (item.name.lowercase().contains(query.toString().lowercase())) {
+                filteredList.add(item)
+            }
+        }
+
+        // Update UI berdasarkan hasil filter
+        checkDataAndUpdateUI(filteredList)
+        showRecyclerList(filteredList)
+    }
+
+    private fun checkDataAndUpdateUI(currentList: List<Dessert>) {
+        if (currentList.isEmpty()) {
             rvDessertCatalog.visibility = View.GONE
             layoutEmptyView.visibility = View.VISIBLE
         } else {
             rvDessertCatalog.visibility = View.VISIBLE
             layoutEmptyView.visibility = View.GONE
-
-            showRecyclerList()
         }
     }
 
-    private fun showRecyclerList() {
-        // Karena di XML kamu pakai spanCount="4", pastikan layout manager-nya pas
-        rvDessertCatalog.layoutManager = GridLayoutManager(this, 2) // Pakai 2 kolom dulu biar rapi
-        val dessertAdapter = DessertAdapter(list)
+    private fun showRecyclerList(currentList: List<Dessert>) {
+        rvDessertCatalog.layoutManager = GridLayoutManager(this, 2)
+        val dessertAdapter = DessertAdapter(currentList)
         rvDessertCatalog.adapter = dessertAdapter
     }
 }
