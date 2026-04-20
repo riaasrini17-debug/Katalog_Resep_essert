@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Katalog_Resep_essert</string>
+    <string name="app_name">Katalog Resep Dessert</string>
+    <string-array name="data_name">
+        <item>Chocolate Lava Cake</item>
+        <item>Strawberry Cheesecake</item>
+        <item>Mango Pudding</item>
+        <item>Tiramisu Classic</item>
+        <item>Macarons</item>
+        <item>Apple Pie</item>
+        <item>Dubay chuwy cookie</item>
+        <item>Pancake</item>
+    </string-array>
 </resources>
