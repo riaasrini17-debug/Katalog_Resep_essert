@@ -1,6 +1,7 @@
 package com.example.katalog_resep_essert
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -120,23 +121,30 @@ class MainActivity : AppCompatActivity() {
         return list
     }
 
-    // --- LOGIKA SEARCHING ---
+    // --- LOGIKA SEARCHING DENGAN LOGCAT & TRY-CATCH ---
     private fun filterSearch(query: String?) {
-        val searchText = query?.lowercase(Locale.getDefault()) ?: ""
-        listDessertDisplay = ArrayList()
+        try {
+            val searchText = query?.lowercase(Locale.getDefault()) ?: ""
+            Log.d("SEARCH_LOG", "User sedang mencari: $searchText")
 
-        if (searchText.isNotEmpty()) {
-            for (item in listDessertOriginal) {
-                if (item.name.lowercase(Locale.getDefault()).contains(searchText)) {
-                    listDessertDisplay.add(item)
+            listDessertDisplay = ArrayList()
+
+            if (searchText.isNotEmpty()) {
+                for (item in listDessertOriginal) {
+                    if (item.name.lowercase(Locale.getDefault()).contains(searchText)) {
+                        listDessertDisplay.add(item)
+                    }
                 }
+            } else {
+                listDessertDisplay.addAll(listDessertOriginal)
             }
-        } else {
-            listDessertDisplay.addAll(listDessertOriginal)
-        }
 
-        updateUI(listDessertDisplay)
-        showRecyclerList(listDessertDisplay)
+            updateUI(listDessertDisplay)
+            showRecyclerList(listDessertDisplay)
+
+        } catch (e: Exception) {
+            Log.e("SEARCH_ERROR", "Kesalahan saat memfilter: ${e.message}")
+        }
     }
 
     private fun updateUI(currentList: List<Dessert>) {

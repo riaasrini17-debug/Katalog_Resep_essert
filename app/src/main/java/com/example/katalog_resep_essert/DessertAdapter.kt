@@ -1,6 +1,7 @@
 package com.example.katalog_resep_essert
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,20 +28,28 @@ class DessertAdapter(private val listDessert: List<Dessert>) :
         holder.imgPhoto.setImageResource(dessert.imageRes)
         holder.tvName.text = dessert.name
 
-        // --- INI KODE NAVIGASI (INTENT) YANG HILANG TADI, BOZZ ---
+        // --- LOGIKA NAVIGASI DENGAN TRY-CATCH & LOGCAT ---
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
 
-            // Validasi Sederhana: Pastikan data yang mau dikirim nggak kosong
-            if (dessert.name.isNotEmpty()) {
-                val intent = Intent(context, DetailActivity::class.java)
+            try {
+                // Validasi Sederhana sebelum pindah halaman
+                if (dessert.name.isNotEmpty()) {
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra("EXTRA_NAME", dessert.name)
+                        putExtra("EXTRA_IMAGE", dessert.imageRes)
+                        putExtra("EXTRA_RECIPE", dessert.recipe)
+                    }
+                    context.startActivity(intent)
 
-                // Kirim data ke DetailActivity
-                intent.putExtra("EXTRA_NAME", dessert.name)
-                intent.putExtra("EXTRA_IMAGE", dessert.imageRes)
-                intent.putExtra("EXTRA_RECIPE", dessert.recipe)
-
-                context.startActivity(intent)
+                    // Logcat untuk info keberhasilan
+                    Log.i("NAV_LOG", "Berhasil pindah ke detail: ${dessert.name}")
+                } else {
+                    Log.w("NAV_LOG", "Data dessert kosong, navigasi dibatalkan.")
+                }
+            } catch (e: Exception) {
+                // Logcat untuk mencatat error jika terjadi crash
+                Log.e("NAV_ERROR", "Gagal pindah halaman: ${e.message}")
             }
         }
     }
