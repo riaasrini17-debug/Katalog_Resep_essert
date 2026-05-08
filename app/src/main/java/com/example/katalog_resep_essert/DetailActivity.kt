@@ -22,14 +22,17 @@ class DetailActivity : AppCompatActivity() {
         // 3. AMBIL DATA DARI INTENT (Dari halaman utama)
         val name = intent.getStringExtra("EXTRA_NAME")
         val image = intent.getIntExtra("EXTRA_IMAGE", 0)
+        val recipe = intent.getStringExtra("EXTRA_RECIPE")
 
         // 4. HUBUNGKAN KE VIEW
         val tvDetailName = findViewById<TextView>(R.id.tvDetailName)
         val imgDetail = findViewById<ImageView>(R.id.imgDetail)
+        val tvDetailRecipe = findViewById<TextView>(R.id.tvDetailRecipe)
 
         // 5. TAMPILKAN DATA
         tvDetailName.text = name
         imgDetail.setImageResource(image)
+        tvDetailRecipe.text = recipe
     }
 
     // --- FUNGSI AGAR TOMBOL BACK BISA DIKLIK ---

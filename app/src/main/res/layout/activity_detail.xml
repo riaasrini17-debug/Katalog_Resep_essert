@@ -43,17 +43,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgDetail" />
 
-    <TextView
-        android:id="@+id/tvDetailDescription"
+    <!-- Mengganti tvDetailDescription menjadi ScrollView + tvDetailRecipe -->
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:text="Ini adalah resep dessert yang sangat lezat dan mudah dibuat di rumah."
-        android:textColor="#757575"
-        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDetailName" />
+        app:layout_constraintTop_toBottomOf="@id/tvDetailName">
+
+        <TextView
+            android:id="@+id/tvDetailRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teks resep akan muncul di sini."
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:lineSpacingExtra="6dp" />
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,6 +38,7 @@ class DessertAdapter(private val listDessert: List<Dessert>) :
                 // Kirim data ke DetailActivity
                 intent.putExtra("EXTRA_NAME", dessert.name)
                 intent.putExtra("EXTRA_IMAGE", dessert.imageRes)
+                intent.putExtra("EXTRA_RECIPE", dessert.recipe)
 
                 context.startActivity(intent)
             }
