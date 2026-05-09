@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.d("LAPORAN_AKHIR", "NIM: 42430014 - Ni Komang Ria Asrini")
+
         // Inisialisasi View
         rvDessertCatalog = findViewById(R.id.rvDessertCatalog)
         layoutEmptyView = findViewById(R.id.layoutEmptyView)

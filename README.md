@@ -15,22 +15,22 @@ Aplikasi "Katalog Resep Dessert" adalah platform informasi resep yang dikembangk
 ##  Screenshot Aplikasi
 
 ### 1. Orientasi Layar (Portrait & Landscape)
-| Portrait Mode | Landscape Mode |
-| :---: | :---: |
-| ![Portrait](URL_SCREENSHOT_PORTRAIT) | ![Landscape](URL_SCREENSHOT_LANDSCAPE) |
+| Portrait Mode |          Landscape Mode          |
+|:-------------:|:--------------------------------:|
+| ![Portrait](img/potrait.jpeg) | ![Landscape](img/Landscape.jpeg) |
 
 ### 2. Fitur Pencarian & Pengurutan Data
-| Hasil Pencarian | Pengurutan A-Z |
-| :---: | :---: |
-| ![Search](URL_SCREENSHOT_SEARCH) | ![Sort](URL_SCREENSHOT_SORT) |
+|      Hasil Pencarian       |     Pengurutan A-Z     |
+|:--------------------------:|:----------------------:|
+| ![Search](img/search.jpeg) | ![Sort](img/Sort.jpeg) |
 
 ---
 
 ##  Debugging & Logcat
 Berikut adalah bukti jendela Logcat yang menampilkan Log dari aktivitas aplikasi beserta identitas NIM mahasiswa:
 
-![Logcat NIM](URL_SCREENSHOT_LOGCAT)
+![Logcat NIM](img/logcat.jpeg)
 
-> **Note**: Logcat menampilkan tag `SEARCH_LOG` dan `NAV_LOG` saat aplikasi dijalankan.
+
 
 ---
