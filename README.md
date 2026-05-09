@@ -29,7 +29,7 @@ Aplikasi "Katalog Resep Dessert" adalah platform informasi resep yang dikembangk
 ##  Debugging & Logcat
 Berikut adalah bukti jendela Logcat yang menampilkan Log dari aktivitas aplikasi beserta identitas NIM mahasiswa:
 
-![Logcat NIM](img/logcat.jpeg)
+![Logcat NIM](img/log.jpeg)
 
 
 
